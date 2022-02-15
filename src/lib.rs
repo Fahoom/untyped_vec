@@ -14,7 +14,7 @@ pub struct UntypedVec {
     capacity: usize,
     len: usize,
     layout: Layout,
-    drop: unsafe fn(*mut u8)
+    drop: unsafe fn(*mut u8),
 }
 
 impl UntypedVec {
@@ -28,7 +28,7 @@ impl UntypedVec {
             capacity,
             len: 0,
             layout,
-            drop: utils::drop_ptr::<T>
+            drop: utils::drop_ptr::<T>,
         }
     }
 
@@ -219,9 +219,8 @@ mod tests {
         for i in 0..100 {
             assert_eq!(vec.get::<Foo>(i), &Foo { i })
         }
-        
-        assert_eq!(vec.swap_remove::<Foo>(0), Foo {i: 0});
-        assert_eq!(vec.get::<Foo>(0), &Foo {i: 99});
-    }
 
+        assert_eq!(vec.swap_remove::<Foo>(0), Foo { i: 0 });
+        assert_eq!(vec.get::<Foo>(0), &Foo { i: 99 });
+    }
 }
